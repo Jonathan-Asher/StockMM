@@ -1,15 +1,23 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import App from './components/App.js';
 
 const options = {
   function: 'DIGITAL_CURRENCY_DAILY',
   symbol: 'BTC',
-  market: 'CNY',
-  apikey: 'demo'
+  market: 'USD',
+  apikey: 'WFIB1LRREPHYFL8J',
+  datatype: 'csv',
+  getUrl() {
+    return 'https://www.alphavantage.co/query?function='+options.function+'&symbol='+options.symbol+'&market='+options.market+'&apikey='+options.apikey+'&datatype='+options.datatype;
+  }
 };
 
 
-var url = 'https://www.alphavantage.co/query?function='+options.function+'&symbol='+options.symbol+'&market='+options.market+'&apikey='+options.apikey;
 
-ReactDOM.render(<App url={ url } />, document.getElementById('root'));
+ReactDOM.render(
+  <BrowserRouter>
+    <App options={ options } />
+  </BrowserRouter>,
+  document.getElementById('root'));
